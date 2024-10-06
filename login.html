@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 25px; /* Adding border-radius for input fields */
+            padding: 15px;
+        }
+
+        button.btn-block {
+            font-size: 18px;
+            border-radius: 25px; /* Adding border-radius for buttons */
+        }
+
+        .input-group-append button {
+            border-radius: 25px; /* Adding border-radius for "Show" button */
+        }
+
+        .btn-dark {
+            border-radius: 25px; /* Adding border-radius for "Register Now" button */
+        }
+
+        footer {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./img/mark.jpg" alt="" width="15%">        </a>
+        <div>
+            <a href="#">03337778000</a>
+            <a href="#" class="ml-3">Help</a>
+            <a href="#" class="ml-3"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </header>
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Existing Customers Section -->
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <h2>Existing Customers</h2>
+                    <p>Sign Into Next</p>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="email">Email Address or Customer Number</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Your Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" placeholder="Enter password">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">Show</button>
+                                </div>
+                            </div>
+                            <a href="#" class="d-block mt-2">Forgotten Password</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- New Customers Section -->
+            <div class="col-md-6 text-center">
+                <div class="card p-4">
+                    <h2>New Customers</h2>
+                    <p>Register with Next today</p>
+                    <a href="/signup.html" class="btn btn-dark btn-block">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer with Help Options -->
+    <footer class="mt-5 text-center">
+        <a href="#">Help</a> | 
+        <a href="#">BFPO</a>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+        }
+    
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+    
+            // Get email and password values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+    
+            // Create an object to hold the credentials
+            const credentials = {
+                email: email,
+                password: password
+            };
+    
+            try {
+                // Send a POST request to the login API
+                const response = await fetch('http://localhost:7000/signIn', { // Update the URL to your API endpoint
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(credentials)
+                });
+    
+                // Check if the response is okay (status in the range 200-299)
+                if (response.ok) {
+                    const data = await response.json();
+                    // Handle successful login (e.g., redirect, show message, etc.)
+                    console.log('Login successful:', data);
+                    // Redirect to the dashboard or homepage
+                    window.location.href = '/dashboard.html'; // Change to your desired URL
+                } else {
+                    // Handle errors (e.g., invalid credentials)
+                    const errorData = await response.json();
+                    alert(errorData.message || 'Login failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                alert('An error occurred. Please try again later.');
+            }
+        });
+    </script>
+    
+</body>
+</html>

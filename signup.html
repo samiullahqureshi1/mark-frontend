@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        button {
+            font-size: 18px;
+        }
+
+        .form-control {
+            border-radius: 25px;
+            padding: 15px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        select {
+            border-radius: 25px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        button.btn-block {
+            border-radius: 25px;
+            padding: 10px;
+        }
+
+        .input-group-append button {
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+
+        .small-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: -10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="navbar navbar-light bg-light px-5">
+        <a class="navbar-brand" href="/index.html">
+            <img src="./img/mark.jpg" alt="" width="15%">        </a>
+        <div>
+            <a href="#">Help</a>
+            <a href="#" class="ml-3"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    </header>
+
+    <!-- Sign Up Form Section -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Quick Secure Sign Up</h2>
+        <p class="text-center">All fields are required except where indicated.</p>
+
+        <div class="row">
+            <!-- Left side: Form -->
+            <div class="col-md-8">
+                <form>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <select class="form-control" id="title">
+                            <option>Select Title</option>
+                            <option>Mr</option>
+                            <option>Ms</option>
+                            <option>Mrs</option>
+                            <option>Miss</option>
+                            <option>Dr</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter your first name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter your last name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword()">Show</button>
+                            </div>
+                        </div>
+                        <small class="small-text">Password must be 6-12 characters and include letters and numbers.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Date Of Birth</label>
+                        <input type="text" class="form-control" id="dob" placeholder="DD MM YY">
+                        <small class="small-text">Date Of Birth format is DD MM YY and age must be at least 18 years old.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telephone">Contact Telephone</label>
+                        <input type="tel" class="form-control" id="telephone" placeholder="Enter your contact number">
+                        <small class="small-text">If we need to contact you, we will be using this number.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="houseNo">House No. / Name</label>
+                        <input type="text" class="form-control" id="houseNo" placeholder="Enter your house number or name">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                </form>
+            </div>
+
+            <!-- Right side: Information Text -->
+            
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+        }
+    </script>
+</body>
+</html>
